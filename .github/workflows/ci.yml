@@ -45,16 +45,13 @@ jobs:
           curl -sS -L -o t10k-labels.idx1-ubyte \
             "https://raw.githubusercontent.com/mrgloom/MNIST-dataset-in-different-formats/master/data/Original%20dataset/t10k-labels.idx1-ubyte"
           cd ..
-          
-      - name: Build project library
+
+      - name: Build project
         run: |
           make clean || true
           make all
-          ls -all lib || true
-      
-      - name: Build project executable
-        run: |
           make build || true
+          ls -all lib || true
           ls -all bin || true
 
       - name: Run info target
