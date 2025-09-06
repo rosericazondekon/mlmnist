@@ -13,7 +13,7 @@ Small C++ project that reads the original MNIST image and label files, processes
 ## Prerequisites
 - A C++ compiler with C++20 support (e.g. g++ 11+ or clang++ with C++20)
 - `make`
-- `curl` or `wget` to download datasets
+- `wget` or `curl` to download datasets
 
 On macOS, Xcode command line tools provide `clang++` and `make`.
 
