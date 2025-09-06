@@ -56,9 +56,23 @@ jobs:
           fi
 
       - name: Build (library only)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get install -y libstdc++
+          make clean || true
+          make all
+          ls lib || true
+      
+      - name: Build (on macos-latest)
+        if: matrix.os != 'ubuntu-latest'
         run: |
           make clean || true
           make all
+          ls lib || true
+
+      - name: Run main program
+        run: |
+          make run-main || true
 
       - name: Run info target
         run: make info
