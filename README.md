@@ -9,7 +9,7 @@ Small C++ project that reads the original MNIST image and label files, processes
 - [`include/`](./include/) — headers for the project
 - [`main.cpp`](./main.cpp) — small demo program that loads MNIST files and prints status
 - [`Makefile`](./Makefile) — builds the shared library and the `bin/main` executable
-- [`mnist_data/`](./mnist_data/) — (not included) directory where MNIST files should live
+- `mnist_data/` — (not included) directory where MNIST files should live
 
 ## Prerequisites
 - A C++ compiler with C++20 support (e.g. g++ 11+ or clang++ with C++20)
