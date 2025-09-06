@@ -1,4 +1,5 @@
 # mlmnist
+[![mlmnist Workflow](https://github.com/rosericazondekon/mlmnist/actions/workflows/ci.yml/badge.svg)](https://github.com/rosericazondekon/mlmnist/actions/workflows/ci.yml)
 
 ## Overview
 Small C++ project that reads the original MNIST image and label files, processes them and splits the dataset into training/validation/test sets. The project builds a shared library and includes a small `main` program that demonstrates loading and splitting the dataset.
