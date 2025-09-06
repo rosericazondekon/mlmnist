@@ -17,9 +17,9 @@ BINS := $(patsubst $(SRC_DIR)/%.cpp,$(BIN_DIR)/%,$(SRCS))
 
 BIN_DIR := bin
 
-.PHONY: all clean info
+.PHONY: all clean info build
 
-# Default: build library
+# Default: build libra
 all: $(LIB_DIR)/$(LIB_NAME)
 
 $(LIB_DIR):
@@ -40,6 +40,9 @@ $(LIB_DIR)/$(LIB_NAME): $(OBJS) | $(LIB_DIR)
 # Build main executable by linking main.cpp with the library object files
 $(BIN_DIR)/main: main.cpp $(OBJS) | $(BIN_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE_DIR) -o "$@" main.cpp $(OBJS)
+
+build: main.cpp
+	$(CC) $(CFLAGS) $(INCLUDE_DIR) $(SRC_DIR)/*.cpp ./main.cpp -o $(BIN_DIR)/main 
 
 # Run main (separate target so user can run it without rebuilding the library)
 run-main: $(BIN_DIR)/main
