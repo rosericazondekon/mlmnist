@@ -1,0 +1,57 @@
+# Compiled object files
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dll
+*.dylib
+
+# Compiled Static libraries
+*.lib
+*.a
+
+# Executable files
+*.exe
+*.out
+*.app
+
+# Debug files
+*.pdb
+*.idb
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Backup files
+*~
+*.bak
+
+# MacOS files
+.DS_Store
+
+# Windows files
+Thumbs.db
+ehthumbs.db
+
+# Visual Studio files
+*.vcxproj*
+*.sln
+*.user
+*.filters
+*.opensdf
+*.sdf
+*.ipch
+
+# Other files and folders
+.vscode/
+lib/*
+obj/
+mnist_data/*
+bin/*

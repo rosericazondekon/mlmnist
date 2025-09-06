@@ -1,0 +1,64 @@
+name: mlmnist Workflow
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup tools (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential g++ wget curl
+
+      - name: Print system info
+        run: |
+          uname -a
+          ${{ matrix.os }} || true
+
+      - name: Download MNIST dataset
+        run: |
+          set -e
+          mkdir -p mnist_data
+          cd mnist_data
+          echo "Downloading MNIST files into $(pwd)"
+          if command -v wget >/dev/null 2>&1; then
+            wget -q -O train-images.idx3-ubyte \
+              "https://raw.githubusercontent.com/mrgloom/MNIST-dataset-in-different-formats/master/data/Original%20dataset/train-images.idx3-ubyte"
+            wget -q -O train-labels.idx1-ubyte \
+              "https://raw.githubusercontent.com/mrgloom/MNIST-dataset-in-different-formats/master/data/Original%20dataset/train-labels.idx1-ubyte"
+            wget -q -O t10k-images.idx3-ubyte \
+              "https://raw.githubusercontent.com/mrgloom/MNIST-dataset-in-different-formats/master/data/Original%20dataset/t10k-images.idx3-ubyte"
+            wget -q -O t10k-labels.idx1-ubyte \
+              "https://raw.githubusercontent.com/mrgloom/MNIST-dataset-in-different-formats/master/data/Original%20dataset/t10k-labels.idx1-ubyte"
+          else
+            echo "wget not found, falling back to curl"
+            curl -sS -L -o train-images.idx3-ubyte \
+              "https://raw.githubusercontent.com/mrgloom/MNIST-dataset-in-different-formats/master/data/Original%20dataset/train-images.idx3-ubyte"
+            curl -sS -L -o train-labels.idx1-ubyte \
+              "https://raw.githubusercontent.com/mrgloom/MNIST-dataset-in-different-formats/master/data/Original%20dataset/train-labels.idx1-ubyte"
+            curl -sS -L -o t10k-images.idx3-ubyte \
+              "https://raw.githubusercontent.com/mrgloom/MNIST-dataset-in-different-formats/master/data/Original%20dataset/t10k-images.idx3-ubyte"
+            curl -sS -L -o t10k-labels.idx1-ubyte \
+              "https://raw.githubusercontent.com/mrgloom/MNIST-dataset-in-different-formats/master/data/Original%20dataset/t10k-labels.idx1-ubyte"
+          fi
+
+      - name: Build (library only)
+        run: |
+          make clean || true
+          make all
+
+      - name: Run info target
+        run: make info

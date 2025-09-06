@@ -3,8 +3,8 @@
 
 int main() {
     DataHandler *dh = new DataHandler();
-    dh->loadFeatureVector("./train-images.idx3-ubyte");
-    dh->loadLabels("./train-labels.idx1-ubyte");
+    dh->loadFeatureVector("./mnist_data/train-images.idx3-ubyte");
+    dh->loadLabels("./mnist_data/train-labels.idx1-ubyte");
     dh->countClasses();
     dh->splitDataset();
 
